@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://ba1lscag004dd"]
+[gd_scene load_steps=4 format=3 uid="uid://ba1lscag004dd"]
+
+[ext_resource type="Texture2D" uid="uid://cyms0mkaqnes" path="res://Assets/boat.png" id="1_optkt"]
 
 [sub_resource type="GDScript" id="GDScript_kd4vc"]
 resource_name = "bootman.gd"
@@ -7,6 +9,7 @@ script/source = "extends CharacterBody2D
 
 const SPEED = 300.0
 
+@onready var sprite_2d = $Sprite2D
 
 
 func _physics_process(delta):
@@ -21,21 +24,26 @@ func _physics_process(delta):
 	else:
 		velocity = input_vector
 	
-	#if velocity.x < 0:
-		#CharacterBody2D.flip_h = true
-	#elif velocity.x > 0:
-		#CharacterBody2D.flip_h = false
+	if velocity.x > 0:
+		sprite_2d.flip_h = true
+	elif velocity.x < 0:
+		sprite_2d.flip_h = false
 		
 	move_and_slide()
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_huvsg"]
-radius = 23.0868
+radius = 48.0104
 
 [node name="bootman" type="CharacterBody2D"]
 script = SubResource("GDScript_kd4vc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(3, 14)
 shape = SubResource("CircleShape2D_huvsg")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("1_optkt")
