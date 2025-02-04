@@ -7,19 +7,16 @@
 resource_name = "bootman.gd"
 script/source = "extends CharacterBody2D
 
+const CANNONPARTICLES = preload(\"res://cannonparticles.tscn\")
 var cannonball_scene = preload(\"res://canonbaw.tscn\")
 var last_shot = 0.0
 const SPEED = 300.0
 var shot_cooldown = 0.5
-#@onready var animated_sprite_2d = $AnimatedSprite2D
-
-
 
 @onready var sprite_2d = $Sprite2D
 
-
 func _physics_process(_delta):
-	#omnidirectional movement
+	# Omnidirectional movement
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength(\"ui_right\") - Input.get_action_strength(\"ui_left\")
 	input_vector.y = Input.get_action_strength(\"ui_down\") - Input.get_action_strength(\"ui_up\")
@@ -35,7 +32,7 @@ func _physics_process(_delta):
 	elif velocity.x < 0:
 		sprite_2d.flip_h = false
 		
-	
+	last_shot += _delta
 	
 	move_and_slide()
 	
@@ -44,13 +41,22 @@ func _physics_process(_delta):
 		print(\"shooting cannonball!\")
 		last_shot = 0
 
+func spawn_cannon_particles():
+	var cannonparticles = CANNONPARTICLES.instantiate()
+	get_parent().add_child(cannonparticles)
+	cannonparticles.position = position
+
+
+
 func shoot():
 	var cannonball_scene = cannonball_scene.instantiate()
-	cannonball_scene.position = position + Vector2(0,40)
-	cannonball_scene.direction = (get_global_mouse_position() - position).normalized()
+	var ship_position = global_position # Use global_position to get the ship's current position
+	var cannon_offset = Vector2(0, 40) # Offset the origin by 40 pixels down
+	var cannon_position = ship_position + cannon_offset # Calculate the cannon's origin position
+	cannonball_scene.position = cannon_position
+	cannonball_scene.direction = (get_global_mouse_position() - cannon_position).normalized() # Use the offset position for direction calculation
+	spawn_cannon_particles()
 	get_parent().add_child(cannonball_scene)
-
-
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_huvsg"]
