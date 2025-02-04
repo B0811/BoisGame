@@ -7,9 +7,13 @@
 resource_name = "bootman.gd"
 script/source = "extends CharacterBody2D
 
-
-
+var cannonball_scene = preload(\"res://canonbaw.tscn\")
+var last_shot = 0.0
 const SPEED = 300.0
+var shot_cooldown = 0.5
+@onready var animated_sprite_2d = $AnimatedSprite2D
+
+
 
 @onready var sprite_2d = $Sprite2D
 
@@ -34,6 +38,17 @@ func _physics_process(_delta):
 	
 	
 	move_and_slide()
+	
+	if Input.is_action_pressed(\"shoot\") and last_shot >= CurrencyManager.player_firerate:
+		shoot()
+		print(\"shooting cannonball!\")
+		last_shot = 0
+
+func shoot():
+	var cannonball_scene = cannonball_scene.instantiate()
+	cannonball_scene.position = position + Vector2(0,40)
+	cannonball_scene.direction = (get_global_mouse_position() - position).normalized()
+	get_parent().add_child(cannonball_scene)
 
 
 "
