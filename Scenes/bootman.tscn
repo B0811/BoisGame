@@ -42,8 +42,9 @@ func _physics_process(_delta):
 radius = 48.0104
 
 [sub_resource type="SystemFont" id="SystemFont_m44d2"]
+subpixel_positioning = 0
 
-[node name="bootman" type="CharacterBody2D"]
+[node name="bootman" type="CharacterBody2D" groups=["players"]]
 script = SubResource("GDScript_kd4vc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cr2xgagephllp"]
+[gd_scene load_steps=8 format=3 uid="uid://cr2xgagephllp"]
 
 [ext_resource type="Script" path="res://Scripts/Node2D.gd" id="1_mo0pe"]
 [ext_resource type="Texture2D" uid="uid://lcdfohx8x1be" path="res://Assets/wooter.png" id="2_2h0nu"]
 [ext_resource type="PackedScene" uid="uid://ba1lscag004dd" path="res://Scenes/bootman.tscn" id="3_l341r"]
+[ext_resource type="PackedScene" uid="uid://di7wj0xhdep0f" path="res://Scenes/enemy.tscn" id="4_e1e1n"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v8how"]
 texture = ExtResource("2_2h0nu")
@@ -138,6 +139,12 @@ texture = ExtResource("2_2h0nu")
 [sub_resource type="TileSet" id="TileSet_v38vl"]
 sources/0 = SubResource("TileSetAtlasSource_v8how")
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_qo3ol"]
+vertices = PackedVector2Array(874, 629, -959, 623, -942, -745, 864, -746)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-952, -755, 874, -757, 885, 640, -970, 633)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+
 [node name="Map 1" type="Node2D"]
 script = ExtResource("1_mo0pe")
 
@@ -148,3 +155,11 @@ layer_0/tile_data = PackedInt32Array(-65536, 393216, 3, -1, 327680, 3, 65535, 32
 
 [node name="bootman" parent="." instance=ExtResource("3_l341r")]
 position = Vector2(7, -77)
+
+[node name="enemy" parent="." node_paths=PackedStringArray("target_to_chase") instance=ExtResource("4_e1e1n")]
+position = Vector2(-801, -543)
+target_to_chase = NodePath("../bootman")
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+position = Vector2(2, 0)
+navigation_polygon = SubResource("NavigationPolygon_qo3ol")
