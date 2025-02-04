@@ -12,10 +12,14 @@ var cannonball_scene = preload(\"res://canonbaw.tscn\")
 var last_shot = 0.0
 const SPEED = 300.0
 var shot_cooldown = 0.5
+var health = 10
 
 @onready var sprite_2d = $Sprite2D
 
 func _physics_process(_delta):
+	
+	CurrencyManager.global_player_position = global_position
+	
 	# Omnidirectional movement
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength(\"ui_right\") - Input.get_action_strength(\"ui_left\")
@@ -62,6 +66,20 @@ func spawn_muzzle_flash(position):
 	muzzle_flash.position = position
 	muzzle_flash.rotation = (get_global_mouse_position() - position).angle() # Set the rotation based on the mouse direction
 	get_parent().add_child(muzzle_flash)
+
+
+func _on_bootmanarea_area_entered(area):
+	if area.is_in_group(\"enemyprojectile\"):
+		health -= 1
+		print(\"Hit! health: \" + str(health))
+		death()
+
+func death():
+	if health <= 0:
+		queue_free()
+		get_tree().reload_current_scene()
+	elif health >= 0:
+		pass
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_huvsg"]
@@ -98,3 +116,5 @@ texture = ExtResource("1_optkt")
 [node name="area" type="CollisionShape2D" parent="bootmanarea"]
 position = Vector2(3, 14)
 shape = SubResource("CircleShape2D_huvsg")
+
+[connection signal="area_entered" from="bootmanarea" to="." method="_on_bootmanarea_area_entered"]

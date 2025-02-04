@@ -1,6 +1,15 @@
 extends CharacterBody2D
 
 var inrange = false
+@onready var shoottimer = $shoottimer
+
+@onready var player = get_tree().get_nodes_in_group("players")
+
+@onready var bootman = $"."
+
+const CANNONPARTICLES = preload("res://cannonparticles.tscn")
+
+var cannonball_scene = preload("res://enemycanonbaw.tscn")
 
 @onready var nav_agent_ = $NavigationAgent2D
 
@@ -37,9 +46,29 @@ func _on_area_2d_area_entered(area):
 	if area.is_in_group("players") :
 		inrange = true
 		print("Player has been found")
-		
+		_on_shoottimer_timeout()
 
 
+func enemyshoot():
+	if inrange == true:
+		var cannonball_scene = cannonball_scene.instantiate()
+		var ship_position = global_position # Use global_position to get the ship's current position
+		var cannon_offset = Vector2(0, 40) # Offset the origin by 40 pixels down
+		var cannon_position = ship_position + cannon_offset # Calculate the cannon's origin position
+		cannonball_scene.position = cannon_position
+		cannonball_scene.direction = (CurrencyManager.global_player_position - cannon_position).normalized() # Use the offset position for direction calculation
+	
+		get_parent().add_child(cannonball_scene)
+	
+	
+		spawn_muzzle_flash(cannon_position) # Spawn the muzzle flash effect
+
+
+func spawn_muzzle_flash(position):
+	var muzzle_flash = CANNONPARTICLES.instantiate()
+	muzzle_flash.position = position
+	muzzle_flash.rotation = (get_global_mouse_position() - position).angle() # Set the rotation based on the mouse direction
+	get_parent().add_child(muzzle_flash)
 
 
 func _on_area_2d_area_exited(area):
@@ -73,3 +102,8 @@ func death():
 		queue_free()
 	elif health >= 0:
 		pass
+
+
+func _on_shoottimer_timeout():
+	enemyshoot()
+	shoottimer.start()
