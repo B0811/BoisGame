@@ -41,10 +41,6 @@ func _physics_process(_delta):
 		print(\"shooting cannonball!\")
 		last_shot = 0
 
-func spawn_cannon_particles():
-	var cannonparticles = CANNONPARTICLES.instantiate()
-	get_parent().add_child(cannonparticles)
-	cannonparticles.position = position
 
 
 
@@ -55,8 +51,18 @@ func shoot():
 	var cannon_position = ship_position + cannon_offset # Calculate the cannon's origin position
 	cannonball_scene.position = cannon_position
 	cannonball_scene.direction = (get_global_mouse_position() - cannon_position).normalized() # Use the offset position for direction calculation
-	spawn_cannon_particles()
+	
 	get_parent().add_child(cannonball_scene)
+	
+	
+	spawn_muzzle_flash(cannon_position) # Spawn the muzzle flash effect
+	get_parent().add_child(cannonball_scene)
+
+func spawn_muzzle_flash(position):
+	var muzzle_flash = CANNONPARTICLES.instantiate()
+	muzzle_flash.position = position
+	muzzle_flash.rotation = (get_global_mouse_position() - position).angle() # Set the rotation based on the mouse direction
+	get_parent().add_child(muzzle_flash)
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_huvsg"]
