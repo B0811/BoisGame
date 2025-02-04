@@ -23,7 +23,7 @@ scale = Vector2(0.75, 0.75)
 texture = ExtResource("2_kamdm")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 2.0
+wait_time = 1.5
 autostart = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]

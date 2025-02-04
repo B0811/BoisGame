@@ -2,13 +2,14 @@ extends CharacterBody2D
 
 var inrange = false
 @onready var shoottimer = $shoottimer
+@onready var sprite_2d = $Sprite2D
 
 @onready var player = get_tree().get_nodes_in_group("players")
 
 @onready var start_position = global_position
 @onready var target_pos = global_position
 
-@onready var wander_range = 32
+@onready var wander_range = 200
 
 @onready var timer = $Timer
 
@@ -35,12 +36,12 @@ func _ready():
 	
 func _physics_process(delta):
 	if inrange == true:
-		nav_agent_.target_position = target_to_chase.global_position - Vector2(200,200)
+		nav_agent_.target_position = CurrencyManager.global_player_position - Vector2(200,200)
 		velocity = global_position.direction_to(nav_agent_.get_next_path_position()) * SPEED
-	#elif inrange == false:
-		#var target_vector = Vector2(randf_range(-wander_range, wander_range), randf_range(-wander_range, wander_range))
-		#nav_agent_.target_position = start_position + target_vector
-		#velocity = global_position.direction_to(nav_agent_.get_next_path_position()) * SPEED
+	if velocity.x > 0:
+		sprite_2d.flip_h = true
+	elif velocity.x < 0:
+		sprite_2d.flip_h = false
 	
 	move_and_slide()
 
@@ -83,11 +84,12 @@ func _on_area_2d_area_exited(area):
 	if area.is_in_group("players"):
 		velocity = Vector2.ZERO
 		inrange = false
+		start_position = global_position
 		print("player has been lost")
 
 func update_target_position():
 	var target_vector = Vector2(randf_range(-wander_range, wander_range), randf_range(-wander_range, wander_range))
-	nav_agent_.target_position = target_vector
+	nav_agent_.target_position = start_position + target_vector
 	velocity = global_position.direction_to(nav_agent_.get_next_path_position()) * wanderspeed
 
 func start_timer(duration):
