@@ -1,4 +1,4 @@
 extends Label
 
-func _process(delta):
-	self.text = str(CurrenyManager.moneys)
+func _process(_delta):
+	self.text = "Gold: " + str(CurrenyManager.moneys)

@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://ba1lscag004dd"]
+[gd_scene load_steps=6 format=3 uid="uid://ba1lscag004dd"]
 
-[ext_resource type="Texture2D" uid="uid://cyms0mkaqnes" path="res://Assets/boat.png" id="1_optkt"]
+[ext_resource type="Texture2D" uid="uid://cyms0mkaqnes" path="res://Assets/pixil-frame-0 (53).png" id="1_optkt"]
 [ext_resource type="Script" path="res://Scripts/Moneytrack.gd" id="1_r3thl"]
 
 [sub_resource type="GDScript" id="GDScript_kd4vc"]
@@ -14,7 +14,7 @@ const SPEED = 300.0
 @onready var sprite_2d = $Sprite2D
 
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	#omnidirectional movement
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength(\"ui_right\") - Input.get_action_strength(\"ui_left\")
@@ -41,6 +41,8 @@ func _physics_process(delta):
 [sub_resource type="CircleShape2D" id="CircleShape2D_huvsg"]
 radius = 48.0104
 
+[sub_resource type="SystemFont" id="SystemFont_m44d2"]
+
 [node name="bootman" type="CharacterBody2D"]
 script = SubResource("GDScript_kd4vc")
 
@@ -55,6 +57,9 @@ offset_left = -558.0
 offset_top = -310.0
 offset_right = -518.0
 offset_bottom = -287.0
+theme_override_fonts/font = SubResource("SystemFont_m44d2")
+theme_override_font_sizes/font_size = 32
+text = "Gold"
 script = ExtResource("1_r3thl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
