@@ -29,7 +29,7 @@ func _ready():
 	
 func _physics_process(delta):
 	if inrange == true:
-		nav_agent_.target_position = target_to_chase.global_position
+		nav_agent_.target_position = target_to_chase.global_position - Vector2(200,200)
 		velocity = global_position.direction_to(nav_agent_.get_next_path_position()) * SPEED
 	
 	
