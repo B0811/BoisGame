@@ -5,6 +5,13 @@ var inrange = false
 
 @onready var player = get_tree().get_nodes_in_group("players")
 
+@onready var start_position = global_position
+@onready var target_pos = global_position
+
+@onready var wander_range = 32
+
+@onready var timer = $Timer
+
 @onready var bootman = $"."
 
 const CANNONPARTICLES = preload("res://cannonparticles.tscn")
@@ -15,13 +22,12 @@ var cannonball_scene = preload("res://enemycanonbaw.tscn")
 
 @export var target_to_chase: CharacterBody2D
 
-var timer = 0
 
 var health = 5
 
 var rng = RandomNumberGenerator.new()
 
-
+const wanderspeed = 100.0
 const SPEED = 200.0
 
 func _ready():
@@ -31,8 +37,10 @@ func _physics_process(delta):
 	if inrange == true:
 		nav_agent_.target_position = target_to_chase.global_position - Vector2(200,200)
 		velocity = global_position.direction_to(nav_agent_.get_next_path_position()) * SPEED
-	
-	
+	#elif inrange == false:
+		#var target_vector = Vector2(randf_range(-wander_range, wander_range), randf_range(-wander_range, wander_range))
+		#nav_agent_.target_position = start_position + target_vector
+		#velocity = global_position.direction_to(nav_agent_.get_next_path_position()) * SPEED
 	
 	move_and_slide()
 
@@ -77,15 +85,19 @@ func _on_area_2d_area_exited(area):
 		inrange = false
 		print("player has been lost")
 
+func update_target_position():
+	var target_vector = Vector2(randf_range(-wander_range, wander_range), randf_range(-wander_range, wander_range))
+	nav_agent_.target_position = target_vector
+	velocity = global_position.direction_to(nav_agent_.get_next_path_position()) * wanderspeed
+
+func start_timer(duration):
+	timer.start(duration)
 
 func _on_timer_timeout():
-	if inrange == false and timer == 0:
-			var random_number = randi()% 4
-			match random_number:
-				0: position.x += 10
-				1: position.x -= 10
-				2: position.y += 10
-				3: position.y -= 10
+	if inrange == false:
+		print("times up")
+		update_target_position()
+		print(update_target_position())
 
 
 func _on_hitboxarea_area_entered(area):

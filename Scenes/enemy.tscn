@@ -23,6 +23,7 @@ scale = Vector2(0.75, 0.75)
 texture = ExtResource("2_kamdm")
 
 [node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
 autostart = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
@@ -38,6 +39,7 @@ position = Vector2(5, 13)
 shape = SubResource("CircleShape2D_kloc1")
 
 [node name="shoottimer" type="Timer" parent="."]
+wait_time = 0.8
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
