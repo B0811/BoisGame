@@ -56,7 +56,6 @@ func shoot():
 	
 	
 	spawn_muzzle_flash(cannon_position) # Spawn the muzzle flash effect
-	get_parent().add_child(cannonball_scene)
 
 func spawn_muzzle_flash(position):
 	var muzzle_flash = CANNONPARTICLES.instantiate()
