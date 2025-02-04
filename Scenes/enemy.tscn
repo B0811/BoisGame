@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://cog6x5u2w258a" path="res://Assets/enemyboot.png" id="2_kamdm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g6h7m"]
-size = Vector2(459, 205)
+size = Vector2(704, 466)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kloc1"]
 radius = 45.0999
@@ -15,7 +15,7 @@ script = ExtResource("1_ep0or")
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="area" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(5.5, 11.5)
+position = Vector2(-4, 2)
 shape = SubResource("RectangleShape2D_g6h7m")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -27,9 +27,17 @@ autostart = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
-[node name="hitbox" type="CollisionShape2D" parent="."]
+[node name="hitboxarea" type="Area2D" parent="."]
+
+[node name="hitbox" type="CollisionShape2D" parent="hitboxarea" groups=["enemyhitbox"]]
+position = Vector2(5, 13)
+shape = SubResource("CircleShape2D_kloc1")
+
+[node name="hitbox2" type="CollisionShape2D" parent="."]
 position = Vector2(5, 13)
 shape = SubResource("CircleShape2D_kloc1")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="hitboxarea" to="." method="_on_hitboxarea_area_entered"]

@@ -11,7 +11,7 @@ var cannonball_scene = preload(\"res://canonbaw.tscn\")
 var last_shot = 0.0
 const SPEED = 300.0
 var shot_cooldown = 0.5
-@onready var animated_sprite_2d = $AnimatedSprite2D
+#@onready var animated_sprite_2d = $AnimatedSprite2D
 
 
 
