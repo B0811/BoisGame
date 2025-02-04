@@ -59,10 +59,17 @@ func _on_timer_timeout():
 				3: position.y -= 10
 
 
-
-
-
 func _on_hitboxarea_area_entered(area):
 	if area.is_in_group("projectile"):
 		health -= 1
-		print("Hit!")
+		print("Hit! enemy health: " + str(health))
+		death()
+
+func death():
+	if health <= 0:
+		print("you did it!")
+		CurrencyManager.moneys += rng.randi_range(5, 20)
+		print(CurrencyManager.moneys)
+		queue_free()
+	elif health >= 0:
+		pass

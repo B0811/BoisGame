@@ -8,3 +8,13 @@ var boolit_speed = 500
 func _physics_process(delta):
 	position += direction * boolit_speed * delta
 	sprite_2d.rotation += -5 * delta
+
+
+
+
+	
+
+
+func _on_area_2d_area_entered(area):
+	if area.is_in_group("enemyhitbox"):	
+		queue_free()

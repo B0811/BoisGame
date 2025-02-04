@@ -27,7 +27,7 @@ autostart = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
 
-[node name="hitboxarea" type="Area2D" parent="."]
+[node name="hitboxarea" type="Area2D" parent="." groups=["enemyhitbox"]]
 
 [node name="hitbox" type="CollisionShape2D" parent="hitboxarea" groups=["enemyhitbox"]]
 position = Vector2(5, 13)
