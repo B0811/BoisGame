@@ -62,7 +62,7 @@ subpixel_positioning = 0
 [node name="bootman" type="CharacterBody2D" groups=["players"]]
 script = SubResource("GDScript_kd4vc")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="hitbox" type="CollisionShape2D" parent="."]
 position = Vector2(3, 14)
 shape = SubResource("CircleShape2D_huvsg")
 
@@ -81,3 +81,9 @@ script = ExtResource("1_r3thl")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.75, 0.75)
 texture = ExtResource("1_optkt")
+
+[node name="bootmanarea" type="Area2D" parent="." groups=["players"]]
+
+[node name="area" type="CollisionShape2D" parent="bootmanarea"]
+position = Vector2(3, 14)
+shape = SubResource("CircleShape2D_huvsg")
