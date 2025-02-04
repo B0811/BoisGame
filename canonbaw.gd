@@ -3,8 +3,8 @@ extends Node2D
 
 var direction = Vector2(1,0)
 
-var boolit_speed = 300
+var boolit_speed = 500
 
 func _physics_process(delta):
 	position += direction * boolit_speed * delta
-	sprite_2d.rotation += -100 * delta
+	sprite_2d.rotation += -5 * delta
