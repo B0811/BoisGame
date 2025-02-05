@@ -18,4 +18,10 @@ texture = ExtResource("1_nqwa0")
 scale = Vector2(7, 7)
 shape = SubResource("CircleShape2D_q3itp")
 
+[node name="toolong" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="toolong" to="." method="_on_toolong_timeout"]

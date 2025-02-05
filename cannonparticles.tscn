@@ -29,3 +29,10 @@ radial_accel_min = 22.66
 radial_accel_max = 22.66
 color_ramp = SubResource("Gradient_sh30r")
 script = ExtResource("1_cdkxf")
+
+[node name="toolong" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="toolong" to="CPUParticles2D" method="_on_toolong_timeout"]
