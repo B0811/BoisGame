@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://b30hwhksjep5i"
+path="res://.godot/imported/sinkingship - Copy.mp3-6bef88a6d574840caa42e4d0c8fc6fad.mp3str"
+
+[deps]
+
+source_file="res://sinkingship - Copy.mp3"
+dest_files=["res://.godot/imported/sinkingship - Copy.mp3-6bef88a6d574840caa42e4d0c8fc6fad.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
