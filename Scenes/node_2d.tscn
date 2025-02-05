@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://cr2xgagephllp"]
+[gd_scene load_steps=9 format=3 uid="uid://cr2xgagephllp"]
 
 [ext_resource type="Script" path="res://Scripts/Node2D.gd" id="1_mo0pe"]
 [ext_resource type="Texture2D" uid="uid://lcdfohx8x1be" path="res://Assets/wooter.png" id="2_2h0nu"]
 [ext_resource type="PackedScene" uid="uid://ba1lscag004dd" path="res://Scenes/bootman.tscn" id="3_l341r"]
 [ext_resource type="PackedScene" uid="uid://di7wj0xhdep0f" path="res://Scenes/enemy.tscn" id="4_e1e1n"]
+[ext_resource type="PackedScene" uid="uid://bxpnjfx0maxeb" path="res://piratehideout.tscn" id="5_6sihv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_v8how"]
 texture = ExtResource("2_2h0nu")
@@ -175,3 +176,6 @@ position = Vector2(823, 0)
 
 [node name="bootspawn5" type="Marker2D" parent="."]
 position = Vector2(0, 694)
+
+[node name="Node2D" parent="." instance=ExtResource("5_6sihv")]
+position = Vector2(492, -1031)
