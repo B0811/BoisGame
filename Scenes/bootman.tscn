@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ba1lscag004dd"]
+[gd_scene load_steps=11 format=3 uid="uid://ba1lscag004dd"]
 
-[ext_resource type="Texture2D" uid="uid://cyms0mkaqnes" path="res://Assets/pixil-frame-0 (53).png" id="1_optkt"]
 [ext_resource type="Script" path="res://Scripts/Moneytrack.gd" id="1_r3thl"]
+[ext_resource type="Texture2D" uid="uid://cyms0mkaqnes" path="res://Assets/boat.png" id="2_lr2cg"]
+[ext_resource type="Texture2D" uid="uid://bqlda4iilitpu" path="res://Assets/pixil-frame-0 (56).png" id="3_qhyti"]
 
 [sub_resource type="GDScript" id="GDScript_kd4vc"]
 resource_name = "bootman.gd"
@@ -13,6 +14,8 @@ var last_shot = 0.0
 const SPEED = 300.0
 var shot_cooldown = 0.5
 var health = 10
+@onready var bobbinganimation = $bobbinganimation
+@onready var rockinganimation = $rockinganimation
 
 @onready var sprite_2d = $Sprite2D
 
@@ -37,6 +40,9 @@ func _physics_process(_delta):
 		sprite_2d.flip_h = false
 		
 	last_shot += _delta
+	
+	
+	
 	
 	move_and_slide()
 	
@@ -88,7 +94,61 @@ radius = 48.0104
 [sub_resource type="SystemFont" id="SystemFont_m44d2"]
 subpixel_positioning = 0
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_p83en"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_lr2cg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_qhyti")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_3l6iq"]
+resource_name = "bobbing"
+length = 0.6
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0698132, 0.0, -0.0698132]
+}
+
+[sub_resource type="Animation" id="Animation_dlqiq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0698132]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_jctsk"]
+_data = {
+"RESET": SubResource("Animation_dlqiq"),
+"bobbing": SubResource("Animation_3l6iq")
+}
+
 [node name="bootman" type="CharacterBody2D" groups=["players"]]
+position = Vector2(0, 0.818207)
+rotation = 0.0698132
 script = SubResource("GDScript_kd4vc")
 
 [node name="hitbox" type="CollisionShape2D" parent="."]
@@ -107,14 +167,23 @@ theme_override_font_sizes/font_size = 32
 text = "Gold"
 script = ExtResource("1_r3thl")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.75, 0.75)
-texture = ExtResource("1_optkt")
+sprite_frames = SubResource("SpriteFrames_p83en")
+autoplay = "default"
+frame_progress = 0.458334
 
 [node name="bootmanarea" type="Area2D" parent="." groups=["players"]]
 
 [node name="area" type="CollisionShape2D" parent="bootmanarea"]
 position = Vector2(3, 14)
 shape = SubResource("CircleShape2D_huvsg")
+
+[node name="rockinganimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jctsk")
+}
+autoplay = "bobbing"
+speed_scale = 1.3
 
 [connection signal="area_entered" from="bootmanarea" to="." method="_on_bootmanarea_area_entered"]
