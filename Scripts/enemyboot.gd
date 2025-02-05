@@ -3,7 +3,7 @@ extends CharacterBody2D
 var inrange = false
 @onready var shoottimer = $shoottimer
 @onready var sprite_2d = $Sprite2D
-
+const SINKINGSHIPSOUND = preload("res://sinkingenemyship.tscn")
 @onready var player = get_tree().get_nodes_in_group("players")
 
 @onready var start_position = global_position
@@ -110,6 +110,8 @@ func _on_hitboxarea_area_entered(area):
 
 func death():
 	if health <= 0:
+		var sinking_ship_sound = SINKINGSHIPSOUND.instantiate()
+		get_parent().add_child(sinking_ship_sound)
 		print("you did it!")
 		CurrencyManager.moneys += rng.randi_range(5, 20)
 		print(CurrencyManager.moneys)
