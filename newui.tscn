@@ -1,0 +1,106 @@
+[gd_scene load_steps=11 format=3 uid="uid://dq2hvw0r1ouh4"]
+
+[ext_resource type="Script" path="res://Control.gd" id="1_6y86v"]
+[ext_resource type="Script" path="res://Scripts/Moneytrack.gd" id="1_sy1ky"]
+[ext_resource type="Script" path="res://cannoncooldownbar.gd" id="2_y8wha"]
+[ext_resource type="Script" path="res://Label3.gd" id="4_6q5ri"]
+
+[sub_resource type="SystemFont" id="SystemFont_r2gfd"]
+subpixel_positioning = 0
+
+[sub_resource type="LabelSettings" id="LabelSettings_8kval"]
+font_size = 50
+font_color = Color(1, 1, 0.313726, 1)
+
+[sub_resource type="Theme" id="Theme_w6ga6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hvn1q"]
+bg_color = Color(1.07091e-05, 0.594922, 0.118839, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_yt1yi"]
+font_size = 55
+
+[sub_resource type="LabelSettings" id="LabelSettings_gkj7q"]
+font_size = 20
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 9.0
+offset_top = 39.0
+offset_right = 1162.0
+offset_bottom = 685.0
+script = ExtResource("1_6y86v")
+
+[node name="Moneytrack" type="Label" parent="Control"]
+offset_left = 55.0
+offset_top = 504.0
+offset_right = 268.0
+offset_bottom = 605.0
+theme_override_fonts/font = SubResource("SystemFont_r2gfd")
+theme_override_font_sizes/font_size = 32
+text = "Gold"
+label_settings = SubResource("LabelSettings_8kval")
+script = ExtResource("1_sy1ky")
+
+[node name="ColorRect" type="ColorRect" parent="Control/Moneytrack"]
+z_index = -1
+layout_mode = 0
+offset_left = -147.0
+offset_top = -41.0
+offset_right = 1360.0
+offset_bottom = 185.0
+color = Color(0, 0, 0, 0.513726)
+
+[node name="cannoncooldownbar" type="ProgressBar" parent="Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 575.0
+offset_right = 831.0
+offset_bottom = 588.0
+theme = SubResource("Theme_w6ga6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_hvn1q")
+show_percentage = false
+script = ExtResource("2_y8wha")
+
+[node name="Label" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 458.0
+offset_top = 487.0
+offset_right = 664.0
+offset_bottom = 581.0
+text = "Cannon"
+label_settings = SubResource("LabelSettings_yt1yi")
+
+[node name="Label2" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 890.0
+offset_top = 483.0
+offset_right = 1096.0
+offset_bottom = 515.0
+text = "Stage: 1"
+label_settings = SubResource("LabelSettings_gkj7q")
+horizontal_alignment = 1
+
+[node name="Label3" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 890.0
+offset_top = 530.0
+offset_right = 1096.0
+offset_bottom = 562.0
+text = "Enemies Sunk: "
+label_settings = SubResource("LabelSettings_gkj7q")
+horizontal_alignment = 1
+script = ExtResource("4_6q5ri")
+
+[node name="Label4" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 452.0
+offset_top = 469.0
+offset_right = 663.0
+offset_bottom = 501.0
+text = "Time: 00:00"
+label_settings = SubResource("LabelSettings_gkj7q")
+horizontal_alignment = 1

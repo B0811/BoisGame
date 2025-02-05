@@ -113,11 +113,13 @@ func death():
 		print("you did it!")
 		CurrencyManager.moneys += rng.randi_range(5, 20)
 		print(CurrencyManager.moneys)
+		CurrencyManager.enemies_sunk += 1 
 		queue_free()
+	
 	elif health >= 0:
 		pass
-
-
+	
+	print(CurrencyManager.enemies_sunk, " enemies sunk")
 func _on_shoottimer_timeout():
 	enemyshoot()
 	shoottimer.start()
