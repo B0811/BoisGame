@@ -162,7 +162,7 @@ _data = {
 "bobbing": SubResource("Animation_3l6iq")
 }
 
-[node name="bootman" type="CharacterBody2D" groups=["players"]]
+[node name="bootman" type="CharacterBody2D" groups=["playercircle", "players"]]
 rotation = 0.0698132
 script = SubResource("GDScript_kd4vc")
 
@@ -176,7 +176,7 @@ sprite_frames = SubResource("SpriteFrames_p83en")
 autoplay = "default"
 frame_progress = 0.458334
 
-[node name="bootmanarea" type="Area2D" parent="." groups=["players"]]
+[node name="bootmanarea" type="Area2D" parent="." groups=["playercircle", "players"]]
 
 [node name="area" type="CollisionShape2D" parent="bootmanarea"]
 position = Vector2(3, 14)

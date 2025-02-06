@@ -6,6 +6,7 @@ var inrange = false
 const SINKINGSHIPSOUND = preload("res://sinkingenemyship.tscn")
 @onready var player = get_tree().get_nodes_in_group("players")
 
+
 @onready var start_position = global_position
 @onready var target_pos = global_position
 
@@ -23,7 +24,7 @@ var cannonball_scene = preload("res://enemycanonbaw.tscn")
 
 @export var target_to_chase: CharacterBody2D
 
-
+var playerradiuscheck = false
 
 var health = 5
 
@@ -37,10 +38,17 @@ func _ready():
 
 
 func _physics_process(delta):
-	if inrange == true:
-		nav_agent_.target_desired_distance = 500
-		nav_agent_.target_position = CurrencyManager.global_player_position - Vector2(200,200)
-		velocity = global_position.direction_to(nav_agent_.get_next_path_position()) * SPEED
+	if playerradiuscheck == true:
+		print("inrange")
+		nav_agent_.target_position = self.global_position
+		velocity = Vector2.ZERO
+	elif playerradiuscheck == false:
+		if inrange == true:
+			nav_agent_.target_desired_distance = 500
+			nav_agent_.target_position = CurrencyManager.global_player_position #- Vector2(200,200)
+			velocity = global_position.direction_to(nav_agent_.get_next_path_position()) * SPEED
+	
+		
 	if velocity.x > 0:
 		sprite_2d.flip_h = true
 	elif velocity.x < 0:
@@ -129,3 +137,14 @@ func death():
 func _on_shoottimer_timeout():
 	enemyshoot()
 	shoottimer.start()
+
+
+func _on_playerradius_area_entered(area):
+	if area.is_in_group("playercircle"):
+		playerradiuscheck = true
+
+
+
+func _on_playerradius_area_exited(area):
+	if area.is_in_group("playercircle"):
+		playerradiuscheck = false
