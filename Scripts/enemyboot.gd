@@ -13,6 +13,8 @@ var inrange = false
 
 @onready var timer = $Timer
 
+
+
 @onready var bootman = $"."
 
 const CANNONPARTICLES = preload("res://cannonparticles.tscn")
@@ -35,9 +37,13 @@ func _ready():
 	rng.randomize()
 	
 func _physics_process(delta):
+	var bootdistance = CurrencyManager.global_player_position - Vector2(200, 200)
 	if inrange == true:
-		nav_agent_.target_position = CurrencyManager.global_player_position - Vector2(200,200)
+		nav_agent_.target_position = CurrencyManager.global_player_position - Vector2(200, 200) 
 		velocity = global_position.direction_to(nav_agent_.get_next_path_position()) * SPEED
+		if bootdistance:
+			print("here")
+			nav_agent_.set_target_position(global_position)
 	if velocity.x > 0:
 		sprite_2d.flip_h = true
 	elif velocity.x < 0:
@@ -65,7 +71,7 @@ func enemyshoot():
 		var cannon_offset = Vector2(0, 40) # Offset the origin by 40 pixels down
 		var cannon_position = ship_position + cannon_offset # Calculate the cannon's origin position
 		cannonball_scene.position = cannon_position
-		cannonball_scene.direction = (CurrencyManager.global_player_position - cannon_position).normalized() # Use the offset position for direction calculation
+		cannonball_scene.direction = (CurrencyManager.global_player_position + Vector2(randf_range(-60, 60), randf_range(-60, 60)) - cannon_position).normalized()  # Use the offset position for direction calculation
 		get_parent().add_child(cannonball_scene)
 	
 	
@@ -122,3 +128,5 @@ func death():
 func _on_shoottimer_timeout():
 	enemyshoot()
 	shoottimer.start()
+
+
