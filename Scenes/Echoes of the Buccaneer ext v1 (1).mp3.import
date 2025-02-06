@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bmoyha0ueruu1"
+path="res://.godot/imported/Echoes of the Buccaneer ext v1 (1).mp3-94d248b061c29421a3dc17ecd1e2b1dd.mp3str"
+
+[deps]
+
+source_file="res://Scenes/Echoes of the Buccaneer ext v1 (1).mp3"
+dest_files=["res://.godot/imported/Echoes of the Buccaneer ext v1 (1).mp3-94d248b061c29421a3dc17ecd1e2b1dd.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

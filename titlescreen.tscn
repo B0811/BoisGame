@@ -1,0 +1,229 @@
+[gd_scene load_steps=20 format=3 uid="uid://davjrtyr6mocy"]
+
+[ext_resource type="Texture2D" uid="uid://bsbwsipr03m4g" path="res://Assets/DALLE_2025-02-05_01.59.45_-_A_cinematic_pixel_art_scene_featuring_a_small_pirate_ship_sailing_on_the_open_ocean._The_ship_has_modest_slightly_billowing_sails_and_a_classic_woode.webp" id="1_0uxw6"]
+[ext_resource type="FontFile" uid="uid://3ijpc1h5gqu7" path="res://Assets/SinkiS93.ttf" id="1_ifkkk"]
+[ext_resource type="Script" path="res://Play.gd" id="2_owmw5"]
+[ext_resource type="Script" path="res://quitbutton.gd" id="3_qsi7e"]
+[ext_resource type="AudioStream" uid="uid://bmoyha0ueruu1" path="res://Scenes/Echoes of the Buccaneer ext v1 (1).mp3" id="5_fn5yr"]
+[ext_resource type="Script" path="res://Timer.gd" id="6_2k6pf"]
+
+[sub_resource type="Theme" id="Theme_7jiqt"]
+default_font = ExtResource("1_ifkkk")
+
+[sub_resource type="Theme" id="Theme_1kgta"]
+default_font = ExtResource("1_ifkkk")
+
+[sub_resource type="LabelSettings" id="LabelSettings_rdw5v"]
+font = ExtResource("1_ifkkk")
+font_size = 53
+font_color = Color(0.564706, 0, 0.866667, 1)
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Theme" id="Theme_uxvfe"]
+default_font = ExtResource("1_ifkkk")
+default_font_size = 29
+
+[sub_resource type="LabelSettings" id="LabelSettings_dh00v"]
+font = ExtResource("1_ifkkk")
+font_size = 50
+font_color = Color(0, 0.494118, 0, 1)
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_step0"]
+resource_name = "titlebobbing"
+length = 1.2
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 3), Vector2(0, 0), Vector2(0, -3)]
+}
+
+[sub_resource type="Animation" id="Animation_8807x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 3)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gtp0v"]
+_data = {
+"RESET": SubResource("Animation_8807x"),
+"titlebobbing": SubResource("Animation_step0")
+}
+
+[sub_resource type="LabelSettings" id="LabelSettings_o5nsi"]
+font = ExtResource("1_ifkkk")
+font_size = 17
+font_color = Color(0.564706, 0, 0.866667, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_mrx6i"]
+font = ExtResource("1_ifkkk")
+font_color = Color(0, 0.494118, 0, 1)
+outline_size = 3
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_ex6oo"]
+resource_name = "fadein"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_witht"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1oqol"]
+_data = {
+"RESET": SubResource("Animation_witht"),
+"fadein": SubResource("Animation_ex6oo")
+}
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 262.0
+offset_right = 1078.0
+offset_bottom = 638.0
+
+[node name="Button" type="Button" parent="Control"]
+offset_left = 250.0
+offset_top = 496.0
+offset_right = 374.0
+offset_bottom = 524.0
+theme = SubResource("Theme_7jiqt")
+text = "Play"
+icon_alignment = 1
+script = ExtResource("2_owmw5")
+
+[node name="Button2" type="Button" parent="Control"]
+offset_left = 249.0
+offset_top = 538.0
+offset_right = 375.0
+offset_bottom = 579.0
+theme = SubResource("Theme_1kgta")
+text = "Quit Game"
+script = ExtResource("3_qsi7e")
+
+[node name="Dalle2025-02-0501_59_45-ACinematicPixelArtSceneFeaturingASmallPirateShipSailingOnTheOpenOcean_TheShipHasModestSlightlyBillowingSailsAndAClassicWoode" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(575, 322.5)
+scale = Vector2(0.638393, 0.633789)
+texture = ExtResource("1_0uxw6")
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(0, 3)
+
+[node name="Label" type="Label" parent="Node2D"]
+offset_left = 350.0
+offset_top = 268.449
+offset_right = 806.0
+offset_bottom = 417.449
+text = "Buccaneer's"
+label_settings = SubResource("LabelSettings_rdw5v")
+
+[node name="Label2" type="Label" parent="Node2D"]
+offset_left = 382.0
+offset_top = 334.511
+offset_right = 767.0
+offset_bottom = 449.511
+theme = SubResource("Theme_uxvfe")
+text = "Bounty"
+label_settings = SubResource("LabelSettings_dh00v")
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Node2D"]
+libraries = {
+"": SubResource("AnimationLibrary_gtp0v")
+}
+autoplay = "titlebobbing"
+speed_scale = 1.25
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(55, 62)
+stream = ExtResource("5_fn5yr")
+autoplay = true
+
+[node name="Label" type="Label" parent="."]
+offset_left = 418.0
+offset_top = 589.0
+offset_right = 735.0
+offset_bottom = 613.0
+text = "Build Version"
+label_settings = SubResource("LabelSettings_o5nsi")
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+offset_left = 526.0
+offset_top = 613.0
+offset_right = 621.0
+offset_bottom = 636.0
+text = "0.0.1"
+label_settings = SubResource("LabelSettings_mrx6i")
+horizontal_alignment = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 4.0
+one_shot = true
+autostart = true
+script = ExtResource("6_2k6pf")
+
+[node name="ColorRect" type="ColorRect" parent="Timer"]
+offset_top = -12.0
+offset_right = 1157.0
+offset_bottom = 663.0
+color = Color(0, 0, 0, 1)
+metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Timer/ColorRect"]
+libraries = {
+"": SubResource("AnimationLibrary_1oqol")
+}
+autoplay = "fadein"
+
+[connection signal="pressed" from="Control/Button" to="Control/Button" method="_on_pressed"]
+[connection signal="pressed" from="Control/Button2" to="Control/Button2" method="_on_pressed"]
+[connection signal="timeout" from="Timer" to="Timer" method="_on_timeout"]
+[connection signal="animation_finished" from="Timer/ColorRect/AnimationPlayer" to="Timer/ColorRect/AnimationPlayer" method="_on_animation_finished"]

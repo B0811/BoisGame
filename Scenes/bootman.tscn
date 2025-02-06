@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://ba1lscag004dd"]
+[gd_scene load_steps=12 format=3 uid="uid://ba1lscag004dd"]
 
 [ext_resource type="Texture2D" uid="uid://cyms0mkaqnes" path="res://Assets/pixil-frame-0 (53).png" id="2_lr2cg"]
 [ext_resource type="Texture2D" uid="uid://bqlda4iilitpu" path="res://Assets/pixil-frame-0 (56).png" id="3_qhyti"]
-[ext_resource type="PackedScene" path="res://newui.tscn" id="4_0vulx"]
+[ext_resource type="PackedScene" uid="uid://dq2hvw0r1ouh4" path="res://newui.tscn" id="4_0vulx"]
 [ext_resource type="AudioStream" uid="uid://b4ntkv6yhkxq1" path="res://untitled - Copy.mp3" id="4_fqecg"]
+[ext_resource type="Script" path="res://Timer.gd" id="4_gq8ib"]
 
 [sub_resource type="GDScript" id="GDScript_kd4vc"]
 resource_name = "bootman.gd"
@@ -180,11 +181,18 @@ speed_scale = 1.3
 
 [node name="Camera2D" type="Camera2D" parent="."]
 
+[node name="CannonSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_fqecg")
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Node2D" parent="CanvasLayer" instance=ExtResource("4_0vulx")]
 
-[node name="CannonSound" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_fqecg")
+[node name="Timer" type="Timer" parent="CanvasLayer"]
+wait_time = 4.0
+one_shot = true
+autostart = true
+script = ExtResource("4_gq8ib")
 
 [connection signal="area_entered" from="bootmanarea" to="." method="_on_bootmanarea_area_entered"]
+[connection signal="timeout" from="CanvasLayer/Timer" to="CanvasLayer/Timer" method="_on_timeout"]
