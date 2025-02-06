@@ -11,8 +11,9 @@ config_version=5
 [application]
 
 config/name="github test"
-run/main_scene="res://titlescreen.tscn"
+run/main_scene="res://PHsplash.tscn"
 config/features=PackedStringArray("4.2", "GL Compatibility")
+run/max_fps=144
 config/icon="res://icon.svg"
 
 [autoload]
@@ -69,3 +70,4 @@ shoot={
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+anti_aliasing/quality/msaa_2d=2

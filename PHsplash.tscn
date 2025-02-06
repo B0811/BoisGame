@@ -1,0 +1,89 @@
+[gd_scene load_steps=8 format=3 uid="uid://b46k4x06shgi1"]
+
+[ext_resource type="Texture2D" uid="uid://dm3n5c6ixd0jm" path="res://Assets/Sus.png" id="1_ahngs"]
+[ext_resource type="Script" path="res://splashtimer.gd" id="3_hiab1"]
+[ext_resource type="FontFile" uid="uid://3ijpc1h5gqu7" path="res://Assets/SinkiS93.ttf" id="3_i11r6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_s4im0"]
+font = ExtResource("3_i11r6")
+font_size = 120
+
+[sub_resource type="Animation" id="Animation_00kfi"]
+resource_name = "fadetoblack"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_twxmv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_gpr0m"]
+_data = {
+"RESET": SubResource("Animation_twxmv"),
+"fadetoblack": SubResource("Animation_00kfi")
+}
+
+[node name="Node2D" type="Node2D"]
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -122.0
+offset_top = -82.0
+offset_right = 1315.0
+offset_bottom = 729.0
+color = Color(0, 0, 0, 1)
+
+[node name="Sus" type="Sprite2D" parent="ColorRect"]
+position = Vector2(703, 405)
+scale = Vector2(0.287639, 0.287639)
+texture = ExtResource("1_ahngs")
+
+[node name="Label" type="Label" parent="ColorRect/Sus"]
+anchors_preset = -1
+anchor_left = 0.238
+anchor_top = 0.329
+anchor_right = 0.238
+anchor_bottom = 0.329
+offset_left = -837.172
+offset_top = 271.996
+offset_right = 280.828
+offset_bottom = 494.996
+text = "Studios"
+label_settings = SubResource("LabelSettings_s4im0")
+horizontal_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_gpr0m")
+}
+autoplay = "fadetoblack"
+
+[node name="splashtimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+autostart = true
+script = ExtResource("3_hiab1")
+
+[connection signal="timeout" from="splashtimer" to="splashtimer" method="_on_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ba1lscag004dd"]
+[gd_scene load_steps=13 format=3 uid="uid://ba1lscag004dd"]
 
 [ext_resource type="Texture2D" uid="uid://cyms0mkaqnes" path="res://Assets/pixil-frame-0 (53).png" id="2_lr2cg"]
 [ext_resource type="Script" path="res://Scenes/Camera2D.gd" id="3_jq337"]
@@ -209,8 +209,5 @@ autostart = true
 script = ExtResource("4_gq8ib")
 
 [connection signal="area_entered" from="bootmanarea" to="." method="_on_bootmanarea_area_entered"]
-
-[connection signal="timeout" from="CanvasLayer/Timer" to="CanvasLayer/Timer" method="_on_timeout"]
-
 [connection signal="timeout" from="Camera2D/Timer" to="Camera2D" method="_on_timer_timeout"]
-
+[connection signal="timeout" from="CanvasLayer/Timer" to="CanvasLayer/Timer" method="_on_timeout"]
