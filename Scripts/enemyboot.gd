@@ -37,13 +37,9 @@ func _ready():
 	rng.randomize()
 	
 func _physics_process(delta):
-	var bootdistance = CurrencyManager.global_player_position - Vector2(200, 200)
 	if inrange == true:
 		nav_agent_.target_position = CurrencyManager.global_player_position - Vector2(200, 200) 
 		velocity = global_position.direction_to(nav_agent_.get_next_path_position()) * SPEED
-		if bootdistance:
-			print("here")
-			nav_agent_.set_target_position(global_position)
 	if velocity.x > 0:
 		sprite_2d.flip_h = true
 	elif velocity.x < 0:
@@ -117,7 +113,6 @@ func death():
 	if health <= 0:
 
 		#print("you did it!")
-=======
 		var sinking_ship_sound = SINKINGSHIPSOUND.instantiate()
 		get_parent().add_child(sinking_ship_sound)
 		print("you did it!")
