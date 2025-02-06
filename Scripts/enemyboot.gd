@@ -110,7 +110,6 @@ func _on_hitboxarea_area_entered(area):
 
 func death():
 	if health <= 0:
-
 		var sinking_ship_sound = SINKINGSHIPSOUND.instantiate()
 		get_parent().add_child(sinking_ship_sound)
 		print("you did it!")
