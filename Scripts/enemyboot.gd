@@ -24,6 +24,7 @@ var cannonball_scene = preload("res://enemycanonbaw.tscn")
 @export var target_to_chase: CharacterBody2D
 
 
+
 var health = 5
 
 var rng = RandomNumberGenerator.new()
@@ -33,9 +34,11 @@ const SPEED = 200.0
 
 func _ready():
 	rng.randomize()
-	
+
+
 func _physics_process(delta):
 	if inrange == true:
+		nav_agent_.target_desired_distance = 500
 		nav_agent_.target_position = CurrencyManager.global_player_position - Vector2(200,200)
 		velocity = global_position.direction_to(nav_agent_.get_next_path_position()) * SPEED
 	if velocity.x > 0:
