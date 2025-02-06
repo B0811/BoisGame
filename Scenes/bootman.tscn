@@ -17,7 +17,6 @@ var cannonball_scene = preload(\"res://canonbaw.tscn\")
 var last_shot = 0.0
 const SPEED = 300.0
 var shot_cooldown = 0.5
-var health = 10
 @onready var bobbinganimation = $bobbinganimation
 @onready var rockinganimation = $rockinganimation
 
@@ -89,16 +88,23 @@ func spawn_muzzle_flash(position):
 
 func _on_bootmanarea_area_entered(area):
 	if area.is_in_group(\"enemyprojectile\"):
-		health -= 1
+		CurrencyManager.player_health -= 1
+		print(CurrencyManager.player_health)
 		CurrencyManager.camera.shake(0.5, 2)
 		#print(\"Hit! health: \" + str(health))
 		death()
+	if area.is_in_group(\"healthpickup\"):
+		CurrencyManager.player_health += 5 
+		if CurrencyManager.player_health > CurrencyManager.player_max_health:
+			CurrencyManager.player_health = CurrencyManager.player_max_health
+			print(CurrencyManager.player_health)
 
 func death():
-	if health <= 0:
+	if CurrencyManager.player_health <= 0:
 		queue_free()
+		CurrencyManager.player_health = 10
 		get_tree().reload_current_scene()
-	elif health >= 0:
+	elif CurrencyManager.player_health >= 0:
 		pass
 
 

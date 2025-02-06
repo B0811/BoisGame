@@ -6,6 +6,7 @@ var inrange = false
 const SINKINGSHIPSOUND = preload("res://sinkingenemyship.tscn")
 @onready var player = get_tree().get_nodes_in_group("players")
 
+var health_up = preload("res://healthupdrop.tscn")
 
 @onready var start_position = global_position
 @onready var target_pos = global_position
@@ -15,6 +16,8 @@ const SINKINGSHIPSOUND = preload("res://sinkingenemyship.tscn")
 @onready var timer = $Timer
 
 @onready var bootman = $"."
+
+var dropchance = 0
 
 const CANNONPARTICLES = preload("res://cannonparticles.tscn")
 
@@ -39,7 +42,6 @@ func _ready():
 
 func _physics_process(delta):
 	if playerradiuscheck == true:
-		print("inrange")
 		nav_agent_.target_position = self.global_position
 		velocity = Vector2.ZERO
 	elif playerradiuscheck == false:
@@ -120,19 +122,25 @@ func _on_hitboxarea_area_entered(area):
 		death()
 
 func death():
+	var health_up_drop = health_up.instantiate()
+	health_up_drop.position = global_position
 	if health <= 0:
 		var sinking_ship_sound = SINKINGSHIPSOUND.instantiate()
 		get_parent().add_child(sinking_ship_sound)
 		#print("you did it!")
 		CurrencyManager.moneys += rng.randi_range(5, 20)
 		#print(CurrencyManager.moneys)
-		CurrencyManager.enemies_sunk += 1 
+		CurrencyManager.enemies_sunk += 1
+		dropchance = rng.randi_range(0, 100)
+		if dropchance <= 25:
+			get_parent().add_child(health_up_drop)
+		elif dropchance >= 26:
+			pass
 		queue_free()
-	
 	elif health >= 0:
 		pass
 	
-	print(CurrencyManager.enemies_sunk, " enemies sunk")
+	
 
 func _on_shoottimer_timeout():
 	enemyshoot()

@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://bwrcb12e6axf8"]
+
+[ext_resource type="Script" path="res://healthupdrop.gd" id="1_bgrf6"]
+[ext_resource type="Texture2D" uid="uid://cp8sl2xa5yw51" path="res://Assets/healthup.png" id="2_fae4v"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u7h76"]
+size = Vector2(32, 32)
+
+[node name="healthupdrop" type="Node2D"]
+script = ExtResource("1_bgrf6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_fae4v")
+
+[node name="pickuparea" type="Area2D" parent="." groups=["healthpickup"]]
+
+[node name="pickupareabox" type="CollisionShape2D" parent="pickuparea" groups=["healthpickup"]]
+shape = SubResource("RectangleShape2D_u7h76")
+
+[connection signal="area_entered" from="pickuparea" to="." method="_on_pickuparea_area_entered"]

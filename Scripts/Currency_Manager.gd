@@ -6,7 +6,12 @@ var moneys = 0
 
 var player_firerate = 1.2
 
+
 var global_player_position = 0
+
+var player_max_health = 10
+
+var player_health = 10
 
 var current_wave: int
 
