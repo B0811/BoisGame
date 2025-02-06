@@ -147,12 +147,12 @@ func _on_shoottimer_timeout():
 	shoottimer.start()
 
 
-func _on_playerradius_area_entered(area):
+
+func _on_radius_area_entered(area):
 	if area.is_in_group("playercircle"):
 		playerradiuscheck = true
 
 
-
-func _on_playerradius_area_exited(area):
+func _on_radius_area_exited(area):
 	if area.is_in_group("playercircle"):
 		playerradiuscheck = false
