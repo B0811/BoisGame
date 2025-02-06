@@ -29,7 +29,7 @@ func position_to_next_wave():
 func prepare_spawn(type, multiplier, mob_spawns):
 	var mob_amount = float(current_wave) * multiplier
 	var mob_wait_time: float = 2
-	print("mob_amount: ", mob_amount)
+	#print("mob_amount: ", mob_amount)
 	var mob_spawn_rounds = mob_amount/mob_spawns
 	spawn_type(type, mob_spawn_rounds, mob_wait_time)
 	
