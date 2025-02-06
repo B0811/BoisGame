@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://davjrtyr6mocy"]
+[gd_scene load_steps=20 format=3 uid="uid://bajt2xe8l0d3k"]
 
 [ext_resource type="Texture2D" uid="uid://bsbwsipr03m4g" path="res://Assets/DALLE_2025-02-05_01.59.45_-_A_cinematic_pixel_art_scene_featuring_a_small_pirate_ship_sailing_on_the_open_ocean._The_ship_has_modest_slightly_billowing_sails_and_a_classic_woode.webp" id="1_0uxw6"]
 [ext_resource type="FontFile" uid="uid://3ijpc1h5gqu7" path="res://Assets/SinkiS93.ttf" id="1_ifkkk"]
@@ -31,23 +31,6 @@ font_color = Color(0, 0.494118, 0, 1)
 outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="Animation" id="Animation_step0"]
-resource_name = "titlebobbing"
-length = 1.2
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.6, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 3), Vector2(0, 0), Vector2(0, -3)]
-}
-
 [sub_resource type="Animation" id="Animation_8807x"]
 length = 0.001
 tracks/0/type = "value"
@@ -61,6 +44,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_step0"]
+resource_name = "titlebobbing"
+length = 10.0
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5, 10),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 3), Vector2(0, 0), Vector2(0, -3)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gtp0v"]
@@ -82,6 +82,21 @@ font_color = Color(0, 0.494118, 0, 1)
 outline_size = 3
 outline_color = Color(0, 0, 0, 1)
 
+[sub_resource type="Animation" id="Animation_witht"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_ex6oo"]
 resource_name = "fadein"
 length = 4.0
@@ -96,21 +111,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(1, 1, 1, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_witht"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Color(0, 0, 0, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_1oqol"]
@@ -129,6 +129,7 @@ offset_right = 1078.0
 offset_bottom = 638.0
 
 [node name="Button" type="Button" parent="Control"]
+layout_mode = 0
 offset_left = 250.0
 offset_top = 496.0
 offset_right = 374.0
@@ -139,6 +140,7 @@ icon_alignment = 1
 script = ExtResource("2_owmw5")
 
 [node name="Button2" type="Button" parent="Control"]
+layout_mode = 0
 offset_left = 249.0
 offset_top = 538.0
 offset_right = 375.0
@@ -179,7 +181,7 @@ libraries = {
 "": SubResource("AnimationLibrary_gtp0v")
 }
 autoplay = "titlebobbing"
-speed_scale = 1.25
+speed_scale = 20.0
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
 position = Vector2(55, 62)
@@ -211,6 +213,7 @@ autostart = true
 script = ExtResource("6_2k6pf")
 
 [node name="ColorRect" type="ColorRect" parent="Timer"]
+visible = false
 offset_top = -12.0
 offset_right = 1157.0
 offset_bottom = 663.0
