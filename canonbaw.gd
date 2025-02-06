@@ -19,3 +19,8 @@ func _on_area_2d_area_entered(area):
 	if area.is_in_group("enemyhitbox"):	
 		queue_free()
 		print("BOOM")
+
+
+
+func _on_toolong_timeout():
+	queue_free()
