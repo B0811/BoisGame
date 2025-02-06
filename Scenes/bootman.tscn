@@ -94,7 +94,7 @@ func _on_bootmanarea_area_entered(area):
 		#print(\"Hit! health: \" + str(health))
 		death()
 	if area.is_in_group(\"healthpickup\"):
-		CurrencyManager.player_health += 5 
+		CurrencyManager.player_health += 1
 		if CurrencyManager.player_health > CurrencyManager.player_max_health:
 			CurrencyManager.player_health = CurrencyManager.player_max_health
 			print(CurrencyManager.player_health)
