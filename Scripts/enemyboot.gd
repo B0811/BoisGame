@@ -54,7 +54,7 @@ func _physics_process(delta):
 func _on_area_2d_area_entered(area):
 	if area.is_in_group("players") :
 		inrange = true
-		print("Player has been found")
+		#print("Player has been found")
 		_on_shoottimer_timeout()
 
 
@@ -65,7 +65,7 @@ func enemyshoot():
 		var cannon_offset = Vector2(0, 40) # Offset the origin by 40 pixels down
 		var cannon_position = ship_position + cannon_offset # Calculate the cannon's origin position
 		cannonball_scene.position = cannon_position
-		cannonball_scene.direction = (CurrencyManager.global_player_position - cannon_position).normalized() # Use the offset position for direction calculation
+		cannonball_scene.direction = (CurrencyManager.global_player_position + Vector2(randi_range(-60, 60), randi_range(-60, 60)) - cannon_position).normalized() # Use the offset position for direction calculation
 	
 		get_parent().add_child(cannonball_scene)
 	
@@ -85,7 +85,7 @@ func _on_area_2d_area_exited(area):
 		velocity = Vector2.ZERO
 		inrange = false
 		start_position = global_position
-		print("player has been lost")
+		#print("player has been lost")
 
 func update_target_position():
 	var target_vector = Vector2(randf_range(-wander_range, wander_range), randf_range(-wander_range, wander_range))
@@ -97,24 +97,24 @@ func start_timer(duration):
 
 func _on_timer_timeout():
 	if inrange == false:
-		print("times up")
+		#print("times up")
 		update_target_position()
-		print(update_target_position())
+		#print(update_target_position())
 
 
 func _on_hitboxarea_area_entered(area):
 	if area.is_in_group("projectile"):
 		health -= 1
-		print("Hit! enemy health: " + str(health))
+		#print("Hit! enemy health: " + str(health))
 		death()
 
 func death():
 	if health <= 0:
 		var sinking_ship_sound = SINKINGSHIPSOUND.instantiate()
 		get_parent().add_child(sinking_ship_sound)
-		print("you did it!")
+		#print("you did it!")
 		CurrencyManager.moneys += rng.randi_range(5, 20)
-		print(CurrencyManager.moneys)
+		#print(CurrencyManager.moneys)
 		CurrencyManager.enemies_sunk += 1 
 		queue_free()
 	
