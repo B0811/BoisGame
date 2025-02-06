@@ -125,6 +125,7 @@ func death():
 		pass
 	
 	print(CurrencyManager.enemies_sunk, " enemies sunk")
+
 func _on_shoottimer_timeout():
 	enemyshoot()
 	shoottimer.start()
