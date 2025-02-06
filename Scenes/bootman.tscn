@@ -2,12 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://cyms0mkaqnes" path="res://Assets/pixil-frame-0 (53).png" id="2_lr2cg"]
 [ext_resource type="Texture2D" uid="uid://bqlda4iilitpu" path="res://Assets/pixil-frame-0 (56).png" id="3_qhyti"]
-
-[ext_resource type="PackedScene" uid="uid://dq2hvw0r1ouh4" path="res://newui.tscn" id="4_0vulx"]
-=======
 [ext_resource type="PackedScene" path="res://newui.tscn" id="4_0vulx"]
 [ext_resource type="AudioStream" uid="uid://b4ntkv6yhkxq1" path="res://untitled - Copy.mp3" id="4_fqecg"]
-
 
 [sub_resource type="GDScript" id="GDScript_kd4vc"]
 resource_name = "bootman.gd"
@@ -19,7 +15,7 @@ var cannonball_scene = preload(\"res://canonbaw.tscn\")
 var last_shot = 0.0
 const SPEED = 300.0
 var shot_cooldown = 0.5
-var health = 1000
+var health = 10
 @onready var bobbinganimation = $bobbinganimation
 @onready var rockinganimation = $rockinganimation
 
@@ -54,7 +50,7 @@ func _physics_process(_delta):
 	
 	if Input.is_action_pressed(\"shoot\") and last_shot >= CurrencyManager.player_firerate:
 		shoot()
-		#print(\"shooting cannonball!\")
+		print(\"shooting cannonball!\")
 		last_shot = 0
 
 		
@@ -89,7 +85,7 @@ func spawn_muzzle_flash(position):
 func _on_bootmanarea_area_entered(area):
 	if area.is_in_group(\"enemyprojectile\"):
 		health -= 1
-		#print(\"Hit! health: \" + str(health))
+		print(\"Hit! health: \" + str(health))
 		death()
 
 func death():
@@ -98,9 +94,6 @@ func death():
 		get_tree().reload_current_scene()
 	elif health >= 0:
 		pass
-
-
-
 "
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_huvsg"]
