@@ -35,6 +35,7 @@ offset_bottom = 685.0
 script = ExtResource("1_6y86v")
 
 [node name="Moneytrack" type="Label" parent="Control"]
+layout_mode = 0
 offset_left = 55.0
 offset_top = 504.0
 offset_right = 268.0
