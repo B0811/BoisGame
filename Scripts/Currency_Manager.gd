@@ -10,6 +10,8 @@ var global_player_position = 0
 
 var current_wave: int
 
+var camera : Camera2D
+
 var moving_to_next_wave: bool
 
 var cannon_cooldown = 0

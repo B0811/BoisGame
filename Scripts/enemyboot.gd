@@ -54,7 +54,7 @@ func _physics_process(delta):
 func _on_area_2d_area_entered(area):
 	if area.is_in_group("players") :
 		inrange = true
-		print("Player has been found")
+		#print("Player has been found")
 		_on_shoottimer_timeout()
 
 
@@ -85,7 +85,7 @@ func _on_area_2d_area_exited(area):
 		velocity = Vector2.ZERO
 		inrange = false
 		start_position = global_position
-		print("player has been lost")
+		#print("player has been lost")
 
 func update_target_position():
 	var target_vector = Vector2(randf_range(-wander_range, wander_range), randf_range(-wander_range, wander_range))
@@ -97,24 +97,24 @@ func start_timer(duration):
 
 func _on_timer_timeout():
 	if inrange == false:
-		print("times up")
+		#print("times up")
 		update_target_position()
-		print(update_target_position())
+		#print(update_target_position())
 
 
 func _on_hitboxarea_area_entered(area):
 	if area.is_in_group("projectile"):
 		health -= 1
-		print("Hit! enemy health: " + str(health))
+		#print("Hit! enemy health: " + str(health))
 		death()
 
 func death():
 	if health <= 0:
 		var sinking_ship_sound = SINKINGSHIPSOUND.instantiate()
 		get_parent().add_child(sinking_ship_sound)
-		print("you did it!")
+		#print("you did it!")
 		CurrencyManager.moneys += rng.randi_range(5, 20)
-		print(CurrencyManager.moneys)
+		#print(CurrencyManager.moneys)
 		CurrencyManager.enemies_sunk += 1 
 		queue_free()
 	
