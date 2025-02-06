@@ -1,13 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://bo2ckejb56wbs"]
+[gd_scene load_steps=4 format=3 uid="uid://bo2ckejb56wbs"]
 
+[ext_resource type="Script" path="res://sinkingenemyship.gd" id="1_6wk4p"]
 [ext_resource type="AudioStream" uid="uid://b30hwhksjep5i" path="res://sinkingship - Copy.mp3" id="1_d6yec"]
 [ext_resource type="Script" path="res://SinkingEnemySound.gd" id="2_u3o3r"]
 
 [node name="Node2D" type="Node2D"]
+script = ExtResource("1_6wk4p")
 
 [node name="SinkingEnemySound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("1_d6yec")
 autoplay = true
 script = ExtResource("2_u3o3r")
 
+[connection signal="finished" from="SinkingEnemySound" to="." method="_on_sinking_enemy_sound_finished"]
 [connection signal="finished" from="SinkingEnemySound" to="SinkingEnemySound" method="_on_finished"]
