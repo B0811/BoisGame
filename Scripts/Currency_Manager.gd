@@ -10,7 +10,7 @@ var global_player_position = 0
 
 var current_wave: int
 
-var moving_to_next_wave: bool
+var moveing_to_next_wave: bool
 
 var cannon_cooldown = 0
 
