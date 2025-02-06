@@ -1,12 +1,18 @@
-[gd_scene load_steps=10 format=3 uid="uid://ba1lscag004dd"]
+[gd_scene load_steps=11 format=3 uid="uid://ba1lscag004dd"]
 
 [ext_resource type="Texture2D" uid="uid://cyms0mkaqnes" path="res://Assets/pixil-frame-0 (53).png" id="2_lr2cg"]
 [ext_resource type="Texture2D" uid="uid://bqlda4iilitpu" path="res://Assets/pixil-frame-0 (56).png" id="3_qhyti"]
+
 [ext_resource type="PackedScene" uid="uid://dq2hvw0r1ouh4" path="res://newui.tscn" id="4_0vulx"]
+=======
+[ext_resource type="PackedScene" path="res://newui.tscn" id="4_0vulx"]
+[ext_resource type="AudioStream" uid="uid://b4ntkv6yhkxq1" path="res://untitled - Copy.mp3" id="4_fqecg"]
+
 
 [sub_resource type="GDScript" id="GDScript_kd4vc"]
 resource_name = "bootman.gd"
 script/source = "extends CharacterBody2D
+@onready var cannon_sound = $CannonSound
 
 const CANNONPARTICLES = preload(\"res://cannonparticles.tscn\")
 var cannonball_scene = preload(\"res://canonbaw.tscn\")
@@ -63,6 +69,12 @@ func shoot():
 	cannonball_scene.direction = (get_global_mouse_position() - cannon_position).normalized() # Use the offset position for direction calculation
 	
 	get_parent().add_child(cannonball_scene)
+	
+	var random_number = randf_range(.8, 1.1)
+	
+	cannon_sound.play()
+	cannon_sound.pitch_scale = random_number
+	
 	
 	
 	spawn_muzzle_flash(cannon_position) # Spawn the muzzle flash effect
@@ -178,5 +190,8 @@ speed_scale = 1.3
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Node2D" parent="CanvasLayer" instance=ExtResource("4_0vulx")]
+
+[node name="CannonSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_fqecg")
 
 [connection signal="area_entered" from="bootmanarea" to="." method="_on_bootmanarea_area_entered"]
