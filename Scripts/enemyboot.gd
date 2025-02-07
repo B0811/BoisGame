@@ -117,7 +117,7 @@ func _on_timer_timeout():
 
 func _on_hitboxarea_area_entered(area):
 	if area.is_in_group("projectile"):
-		health -= 1
+		health -= CurrencyManager.cannon_damage
 		#print("Hit! enemy health: " + str(health))
 		death()
 

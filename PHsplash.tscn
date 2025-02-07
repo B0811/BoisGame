@@ -8,22 +8,6 @@
 font = ExtResource("3_i11r6")
 font_size = 120
 
-[sub_resource type="Animation" id="Animation_00kfi"]
-resource_name = "fadetoblack"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:color")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.5, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
-}
-
 [sub_resource type="Animation" id="Animation_twxmv"]
 length = 0.001
 tracks/0/type = "value"
@@ -37,6 +21,22 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_00kfi"]
+resource_name = "fadetoblack"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1.6, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 0), Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(0, 0, 0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_gpr0m"]
@@ -73,17 +73,16 @@ text = "Studios"
 label_settings = SubResource("LabelSettings_s4im0")
 horizontal_alignment = 1
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="ColorRect"]
-root_node = NodePath("../..")
-libraries = {
-"": SubResource("AnimationLibrary_gpr0m")
-}
-autoplay = "fadetoblack"
-
 [node name="splashtimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
 autostart = true
 script = ExtResource("3_hiab1")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_gpr0m")
+}
+autoplay = "fadetoblack"
 
 [connection signal="timeout" from="splashtimer" to="splashtimer" method="_on_timeout"]
