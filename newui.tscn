@@ -1,9 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://dq2hvw0r1ouh4"]
+[gd_scene load_steps=16 format=3 uid="uid://dq2hvw0r1ouh4"]
 
 [ext_resource type="Script" path="res://Control.gd" id="1_6y86v"]
 [ext_resource type="Script" path="res://Scripts/Moneytrack.gd" id="1_sy1ky"]
 [ext_resource type="Script" path="res://cannoncooldownbar.gd" id="2_y8wha"]
 [ext_resource type="Script" path="res://Label3.gd" id="4_6q5ri"]
+[ext_resource type="Script" path="res://playerhpbar.gd" id="5_rwowl"]
+[ext_resource type="Script" path="res://cannondamageui.gd" id="6_krjdv"]
 
 [sub_resource type="SystemFont" id="SystemFont_r2gfd"]
 subpixel_positioning = 0
@@ -18,10 +20,18 @@ font_color = Color(1, 1, 0.313726, 1)
 bg_color = Color(1.07091e-05, 0.594922, 0.118839, 1)
 
 [sub_resource type="LabelSettings" id="LabelSettings_yt1yi"]
-font_size = 55
+font_size = 35
 
 [sub_resource type="LabelSettings" id="LabelSettings_gkj7q"]
 font_size = 20
+
+[sub_resource type="Theme" id="Theme_mfo5p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dxkge"]
+bg_color = Color(0.699195, 2.08165e-06, 6.73831e-07, 1)
+
+[sub_resource type="Theme" id="Theme_gmkyf"]
+default_font_size = 20
 
 [node name="Node2D" type="Node2D"]
 
@@ -57,40 +67,39 @@ color = Color(0, 0, 0, 0.513726)
 
 [node name="cannoncooldownbar" type="ProgressBar" parent="Control"]
 layout_mode = 0
-offset_left = 296.0
-offset_top = 575.0
-offset_right = 831.0
-offset_bottom = 588.0
+offset_left = 507.0
+offset_top = 516.0
+offset_right = 631.0
+offset_bottom = 543.0
 theme = SubResource("Theme_w6ga6")
 theme_override_styles/fill = SubResource("StyleBoxFlat_hvn1q")
-show_percentage = false
 script = ExtResource("2_y8wha")
 
 [node name="Label" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 458.0
-offset_top = 487.0
-offset_right = 664.0
-offset_bottom = 581.0
+offset_left = 503.0
+offset_top = 466.0
+offset_right = 632.0
+offset_bottom = 515.0
 text = "Cannon"
 label_settings = SubResource("LabelSettings_yt1yi")
 
 [node name="Label2" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 890.0
-offset_top = 483.0
-offset_right = 1096.0
-offset_bottom = 515.0
+offset_left = 971.0
+offset_top = 477.0
+offset_right = 1177.0
+offset_bottom = 505.0
 text = "Stage: 1"
 label_settings = SubResource("LabelSettings_gkj7q")
 horizontal_alignment = 1
 
 [node name="Label3" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 890.0
-offset_top = 530.0
-offset_right = 1096.0
-offset_bottom = 562.0
+offset_left = 931.0
+offset_top = 515.0
+offset_right = 1137.0
+offset_bottom = 581.0
 text = "Enemies Sunk: "
 label_settings = SubResource("LabelSettings_gkj7q")
 horizontal_alignment = 1
@@ -98,10 +107,31 @@ script = ExtResource("4_6q5ri")
 
 [node name="Label4" type="Label" parent="Control"]
 layout_mode = 0
-offset_left = 452.0
-offset_top = 469.0
-offset_right = 663.0
-offset_bottom = 501.0
+offset_left = 52.0
+offset_top = 475.0
+offset_right = 263.0
+offset_bottom = 507.0
 text = "Time: 00:00"
 label_settings = SubResource("LabelSettings_gkj7q")
 horizontal_alignment = 1
+
+[node name="playerhpbar" type="ProgressBar" parent="Control"]
+layout_mode = 0
+offset_left = 296.0
+offset_top = 554.0
+offset_right = 841.0
+offset_bottom = 591.0
+theme = SubResource("Theme_mfo5p")
+theme_override_styles/fill = SubResource("StyleBoxFlat_dxkge")
+show_percentage = false
+script = ExtResource("5_rwowl")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 904.0
+offset_top = 593.0
+offset_right = 1105.0
+offset_bottom = 630.0
+theme = SubResource("Theme_gmkyf")
+text = "Cannonball Damage:"
+horizontal_alignment = 1
+script = ExtResource("6_krjdv")

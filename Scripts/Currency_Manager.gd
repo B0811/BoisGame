@@ -22,3 +22,5 @@ var moving_to_next_wave: bool
 var cannon_cooldown = 0
 
 var enemies_sunk = 0
+
+var cannon_damage = 1
