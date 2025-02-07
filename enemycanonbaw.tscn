@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bosjvc5e3xb3m"]
+[gd_scene load_steps=4 format=3 uid="uid://crtxjio2pj7dq"]
 
 [ext_resource type="Script" path="res://enemycanonbaw.gd" id="1_pxoho"]
 [ext_resource type="Texture2D" uid="uid://b2w0mloiljlk2" path="res://Assets/pixil-frame-0 (54).png" id="2_4hee3"]

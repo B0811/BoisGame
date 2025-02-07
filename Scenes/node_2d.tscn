@@ -1,9 +1,9 @@
-[gd_scene load_steps=13 format=3 uid="uid://cr2xgagephllp"]
+[gd_scene load_steps=13 format=3 uid="uid://bdjlu21dkrdqm"]
 
 [ext_resource type="Script" path="res://Scripts/Node2D.gd" id="1_mo0pe"]
 [ext_resource type="Texture2D" uid="uid://lcdfohx8x1be" path="res://Assets/wooter.png" id="2_2h0nu"]
-[ext_resource type="PackedScene" uid="uid://ba1lscag004dd" path="res://Scenes/bootman.tscn" id="3_l341r"]
-[ext_resource type="PackedScene" uid="uid://di7wj0xhdep0f" path="res://Scenes/enemy.tscn" id="4_e1e1n"]
+[ext_resource type="PackedScene" uid="uid://bkisc00bnc7qc" path="res://Scenes/bootman.tscn" id="3_l341r"]
+[ext_resource type="PackedScene" uid="uid://b8gqpdu6bemdi" path="res://Scenes/enemy.tscn" id="4_e1e1n"]
 [ext_resource type="Script" path="res://Timer.gd" id="5_ur1gn"]
 [ext_resource type="PackedScene" uid="uid://cej3xjey5virf" path="res://cave.tscn" id="6_0a2a5"]
 

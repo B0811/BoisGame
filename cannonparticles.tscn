@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://ddbe4ytjbpwhj"]
+[gd_scene load_steps=4 format=3 uid="uid://wlfu801mbtek"]
 
 [ext_resource type="Script" path="res://cannonparticles.gd" id="1_4vr5q"]
 [ext_resource type="Script" path="res://CPUParticles2D.gd" id="1_cdkxf"]
