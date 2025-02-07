@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 [autoload]
 
 CurrencyManager="*res://Scripts/Currency_Manager.gd"
+ShootingMechanics="*res://shooting_mechanics.gd"
 
 [display]
 

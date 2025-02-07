@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://di7wj0xhdep0f"]
+[gd_scene load_steps=6 format=3 uid="uid://b8gqpdu6bemdi"]
 
 [ext_resource type="Script" path="res://Scripts/enemyboot.gd" id="1_ep0or"]
 [ext_resource type="Texture2D" uid="uid://cog6x5u2w258a" path="res://Assets/enemyboot.png" id="2_kamdm"]

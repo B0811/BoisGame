@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://ba1lscag004dd"]
+[gd_scene load_steps=13 format=3 uid="uid://bkisc00bnc7qc"]
 
 [ext_resource type="Texture2D" uid="uid://cyms0mkaqnes" path="res://Assets/pixil-frame-0 (53).png" id="2_lr2cg"]
 [ext_resource type="Script" path="res://Scenes/Camera2D.gd" id="3_jq337"]
@@ -10,7 +10,7 @@
 [sub_resource type="GDScript" id="GDScript_kd4vc"]
 resource_name = "bootman.gd"
 script/source = "extends CharacterBody2D
-@onready var cannon_sound = $CannonSound
+@onready var cannon_sound2 = $CannonSound
 
 const CANNONPARTICLES = preload(\"res://cannonparticles.tscn\")
 var cannonball_scene = preload(\"res://canonbaw.tscn\")
@@ -23,20 +23,21 @@ var shot_cooldown = 0.5
 @onready var camera_2d = $Camera2D
 
 
+
 @onready var sprite_2d = $Sprite2D
 
 func _physics_process(_delta):
-	
-	CurrencyManager.global_player_position = global_position
 	
 	# Omnidirectional movement
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength(\"ui_right\") - Input.get_action_strength(\"ui_left\")
 	input_vector.y = Input.get_action_strength(\"ui_down\") - Input.get_action_strength(\"ui_up\")
 	input_vector = input_vector.normalized()
+	move_and_slide()
+	print(input_vector)
 	
 	if input_vector:
-		velocity = input_vector * 300
+		velocity = input_vector * SPEED
 	else:
 		velocity = input_vector
 	
@@ -44,46 +45,30 @@ func _physics_process(_delta):
 		sprite_2d.flip_h = true
 	elif velocity.x < 0:
 		sprite_2d.flip_h = false
+	
+	ShootingMechanics.mouse = get_global_mouse_position()
+	ShootingMechanics.cannon_sound = cannon_sound2
+	
+	CurrencyManager.global_player_position = global_position
+	
+	
+	
 		
 	last_shot += _delta
 	
 	CurrencyManager.cannon_cooldown = last_shot
 	
 	
-	move_and_slide()
-	
+	#shooting logic
 	if Input.is_action_pressed(\"shoot\") and last_shot >= CurrencyManager.player_firerate:
-		shoot()
-		#print(\"shooting cannonball!\")
+		if ShootingMechanics.basicshot == true:
+			ShootingMechanics.basic_shot()
+		elif ShootingMechanics.basicshot == false:
+			pass
 		last_shot = 0
 
-		
 
 
-func shoot():
-	var cannonball_scene = cannonball_scene.instantiate()
-	var ship_position = global_position # Use global_position to get the ship's current position
-	var cannon_offset = Vector2(0, 40) # Offset the origin by 40 pixels down
-	var cannon_position = ship_position + cannon_offset # Calculate the cannon's origin position
-	cannonball_scene.position = cannon_position
-	cannonball_scene.direction = (get_global_mouse_position() - cannon_position).normalized() # Use the offset position for direction calculation
-	
-	get_parent().add_child(cannonball_scene)
-	
-	var random_number = randf_range(.8, 1.1)
-	
-	cannon_sound.play()
-	cannon_sound.pitch_scale = random_number
-	
-	
-	
-	spawn_muzzle_flash(cannon_position) # Spawn the muzzle flash effect
-
-func spawn_muzzle_flash(position):
-	var muzzle_flash = CANNONPARTICLES.instantiate()
-	muzzle_flash.position = position
-	muzzle_flash.rotation = (get_global_mouse_position() - position).angle() # Set the rotation based on the mouse direction
-	get_parent().add_child(muzzle_flash)
 
 
 func _on_bootmanarea_area_entered(area):
