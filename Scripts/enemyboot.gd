@@ -17,6 +17,8 @@ var health_up = preload("res://healthupdrop.tscn")
 
 @onready var bootman = $"."
 
+@onready var navtimer = $navtimer
+
 var dropchance = 0
 
 const CANNONPARTICLES = preload("res://cannonparticles.tscn")
@@ -35,15 +37,15 @@ var rng = RandomNumberGenerator.new()
 
 const wanderspeed = 100.0
 const SPEED = 200.0
+const renav = 150
 
 func _ready():
 	rng.randomize()
 
 
 func _physics_process(delta):
-	if playerradiuscheck == true:
-		nav_agent_.target_position = self.global_position
-		velocity = Vector2.ZERO
+	if playerradiuscheck == true and navtimer.time_left == 0:
+		_on_navtimer_timeout()
 	elif playerradiuscheck == false:
 		if inrange == true:
 			nav_agent_.target_desired_distance = 500
@@ -156,3 +158,13 @@ func _on_radius_area_entered(area):
 func _on_radius_area_exited(area):
 	if area.is_in_group("playercircle"):
 		playerradiuscheck = false
+
+
+
+
+
+func _on_navtimer_timeout():
+	nav_agent_.target_position = (self.global_position + Vector2(randi_range(-10, 10), randi_range(-10, 10))).normalized()
+	#velocity = Vector2.ZERO
+	velocity = global_position.direction_to(nav_agent_.get_next_path_position()) * renav
+	navtimer.start()

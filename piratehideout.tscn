@@ -16,7 +16,7 @@
 [ext_resource type="Script" path="res://Button3.gd" id="14_in6mc"]
 [ext_resource type="Script" path="res://Button4.gd" id="15_y0ryh"]
 [ext_resource type="Script" path="res://LeavingArea.gd" id="16_256ic"]
-[ext_resource type="PackedScene" uid="uid://cfwvs8un7ye3m" path="res://shotgunpickup.tscn" id="17_28j0n"]
+[ext_resource type="PackedScene" path="res://shotgunpickup.tscn" id="17_28j0n"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_r2400"]
 texture = ExtResource("1_0je4l")
