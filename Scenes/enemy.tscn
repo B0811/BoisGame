@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://b8gqpdu6bemdi"]
+[gd_scene load_steps=7 format=3 uid="uid://b8gqpdu6bemdi"]
 
 [ext_resource type="Script" path="res://Scripts/enemyboot.gd" id="1_ep0or"]
 [ext_resource type="Texture2D" uid="uid://cog6x5u2w258a" path="res://Assets/enemyboot.png" id="2_kamdm"]
@@ -11,6 +11,8 @@ radius = 54.0093
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qy705"]
 radius = 155.158
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_v8hxr"]
 
 [node name="enemy" type="CharacterBody2D"]
 script = ExtResource("1_ep0or")
@@ -46,6 +48,9 @@ wait_time = 1.5
 [node name="radiusarea" type="CollisionShape2D" parent="radius"]
 position = Vector2(5, 15)
 shape = SubResource("CircleShape2D_qy705")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_v8hxr")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]
