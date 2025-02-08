@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://cfwvs8un7ye3m"]
+
+[ext_resource type="Script" path="res://shotgunpickup.gd" id="1_32arg"]
+[ext_resource type="Texture2D" uid="uid://dlio32l1qf7cw" path="res://Assets/pixil-frame-0 (22).png" id="2_cy7sh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8e6dy"]
+size = Vector2(128, 128)
+
+[node name="shotgunpickup" type="Node2D"]
+script = ExtResource("1_32arg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_cy7sh")
+
+[node name="pickuparea" type="Area2D" parent="." groups=["shotgunpick"]]
+
+[node name="pickupareashape" type="CollisionShape2D" parent="pickuparea"]
+shape = SubResource("RectangleShape2D_8e6dy")
+
+[connection signal="area_entered" from="pickuparea" to="." method="_on_pickuparea_area_entered"]

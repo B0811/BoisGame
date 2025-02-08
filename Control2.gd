@@ -44,9 +44,14 @@ func _on_button_pressed():
 
 func _on_button_2_pressed():
 	if CurrencyManager.moneys >= 50:
-		CurrencyManager.cannon_damage += .5
-		print("Increased cannon damage to ", CurrencyManager.cannon_damage)
-		CurrencyManager.moneys -= 50
+		if ShootingMechanics.basicshot == true:
+			CurrencyManager.cannon_damage += .5
+			print("Increased cannon damage to ", CurrencyManager.cannon_damage)
+			CurrencyManager.moneys -= 50
+		elif ShootingMechanics.shotgunshot == true:
+			CurrencyManager.cannon_damage += .10
+			print("Increased cannon damage to ", CurrencyManager.cannon_damage)
+			CurrencyManager.moneys -= 50
 
 
 func _on_button_3_pressed():

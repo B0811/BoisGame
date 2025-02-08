@@ -34,7 +34,7 @@ func _physics_process(_delta):
 	input_vector.y = Input.get_action_strength(\"ui_down\") - Input.get_action_strength(\"ui_up\")
 	input_vector = input_vector.normalized()
 	move_and_slide()
-	print(input_vector)
+	
 	
 	if input_vector:
 		velocity = input_vector * SPEED
@@ -64,7 +64,8 @@ func _physics_process(_delta):
 		if ShootingMechanics.basicshot == true:
 			ShootingMechanics.basic_shot()
 		elif ShootingMechanics.basicshot == false:
-			pass
+			if ShootingMechanics.shotgunshot == true:
+				ShootingMechanics.shotgun_shot()
 		last_shot = 0
 
 
@@ -83,6 +84,9 @@ func _on_bootmanarea_area_entered(area):
 		if CurrencyManager.player_health > CurrencyManager.player_max_health:
 			CurrencyManager.player_health = CurrencyManager.player_max_health
 			print(CurrencyManager.player_health)
+	if area.is_in_group(\"shotgunpick\"):
+		ShootingMechanics.basicshot = false
+		ShootingMechanics.shotgunshot = true
 
 func death():
 	if CurrencyManager.player_health <= 0:
