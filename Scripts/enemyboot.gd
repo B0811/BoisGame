@@ -49,7 +49,7 @@ func _physics_process(delta):
 	elif playerradiuscheck == false:
 		if inrange == true:
 			nav_agent_.target_desired_distance = 500
-			nav_agent_.target_position = CurrencyManager.global_player_position #- Vector2(200,200)
+			nav_agent_.target_position = CurrencyManager.global_player_position 
 			velocity = global_position.direction_to(nav_agent_.get_next_path_position()) * SPEED
 	
 		
