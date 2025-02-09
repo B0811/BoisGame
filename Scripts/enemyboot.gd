@@ -164,7 +164,7 @@ func _on_radius_area_exited(area):
 
 
 func _on_navtimer_timeout():
-	nav_agent_.target_position = (self.global_position + Vector2(randi_range(-10, 10), randi_range(-10, 10))).normalized()
+	nav_agent_.target_position = CurrencyManager.global_player_position - Vector2(randi_range(-100, 100), randi_range(-100, 100))
 	#velocity = Vector2.ZERO
 	velocity = global_position.direction_to(nav_agent_.get_next_path_position()) * renav
 	navtimer.start()
